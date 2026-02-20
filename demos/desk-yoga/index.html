@@ -27,6 +27,19 @@
 <script>
 (function () {
   try {
+    window.__phoneSimNormalize = true;
+    if (!window.location || typeof window.location.pathname !== "string") return;
+    var p = window.location.pathname;
+    if (!p.endsWith("/index.html")) return;
+    var nextPath = p.slice(0, -"/index.html".length) + "/";
+    window.history.replaceState(window.history.state, "", nextPath + window.location.search + window.location.hash);
+  } catch {}
+})();
+</script>
+
+<script>
+(function () {
+  try {
     if (window === window.parent) return;
 
     var parentOrigin = "*";
